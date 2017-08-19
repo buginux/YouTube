@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  VideoCell.swift
 //  YouTube
 //
 //  Created by buginux on 2017/8/19.
@@ -8,43 +8,13 @@
 
 import UIKit
 
-class HomeViewController: UICollectionViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        title = "Home"
-        collectionView?.backgroundColor = UIColor.white
-        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "CellIdentifier")
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellIdentifier", for: indexPath)
-        
-        return cell
-    }
-}
-
-extension HomeViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200.0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-}
-
 class VideoCell: UICollectionViewCell {
     
     var thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         
-        imageView.backgroundColor = UIColor.blue
+        imageView.image = UIImage(named: "taylor_swift_blank_space")
+        imageView.contentMode = .scaleAspectFill
         
         return imageView
     }()
@@ -60,7 +30,9 @@ class VideoCell: UICollectionViewCell {
     var profileImageView: UIImageView = {
         let imageView = UIImageView()
         
-        imageView.backgroundColor = UIColor.orange
+        imageView.image = UIImage(named: "taylor_swift_profile")
+        imageView.layer.cornerRadius = 22.0
+        imageView.layer.masksToBounds = true
         
         return imageView
     }()
@@ -120,30 +92,3 @@ class VideoCell: UICollectionViewCell {
         
     }
 }
-
-extension UIView {
-    func addConstraints(withFormat format: String, views: [UIView]) {
-        var viewsDictionary = [String: UIView]()
-        
-        for (index, view) in views.enumerated() {
-            let key = "v\(index)"
-            view.translatesAutoresizingMaskIntoConstraints = false
-            viewsDictionary[key] = view
-        }
-        
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-

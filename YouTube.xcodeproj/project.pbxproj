@@ -11,6 +11,9 @@
 		A2D82D541F47B24D0019640B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D82D531F47B24D0019640B /* HomeViewController.swift */; };
 		A2D82D591F47B24D0019640B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2D82D581F47B24D0019640B /* Assets.xcassets */; };
 		A2D82D5C1F47B24D0019640B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2D82D5A1F47B24D0019640B /* LaunchScreen.storyboard */; };
+		A2D82D651F47C8810019640B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D82D641F47C8810019640B /* UIColor+Extension.swift */; };
+		A2D82D671F47C8E10019640B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D82D661F47C8E10019640B /* UIView+Extension.swift */; };
+		A2D82D6B1F47C9240019640B /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D82D6A1F47C9240019640B /* VideoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,9 @@
 		A2D82D581F47B24D0019640B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A2D82D5B1F47B24D0019640B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2D82D5D1F47B24D0019640B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A2D82D641F47C8810019640B /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		A2D82D661F47C8E10019640B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		A2D82D6A1F47C9240019640B /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +39,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A21E6E751F47D60B00862ACF /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A2D82D531F47B24D0019640B /* HomeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		A2D82D451F47B24D0019640B = {
 			isa = PBXGroup;
 			children = (
@@ -52,13 +66,40 @@
 		A2D82D501F47B24D0019640B /* YouTube */ = {
 			isa = PBXGroup;
 			children = (
+				A2D82D681F47C91C0019640B /* Home */,
+				A2D82D631F47C8720019640B /* Extensions */,
 				A2D82D511F47B24D0019640B /* AppDelegate.swift */,
-				A2D82D531F47B24D0019640B /* HomeViewController.swift */,
 				A2D82D581F47B24D0019640B /* Assets.xcassets */,
 				A2D82D5A1F47B24D0019640B /* LaunchScreen.storyboard */,
 				A2D82D5D1F47B24D0019640B /* Info.plist */,
 			);
 			path = YouTube;
+			sourceTree = "<group>";
+		};
+		A2D82D631F47C8720019640B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A2D82D641F47C8810019640B /* UIColor+Extension.swift */,
+				A2D82D661F47C8E10019640B /* UIView+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A2D82D681F47C91C0019640B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A21E6E751F47D60B00862ACF /* ViewController */,
+				A2D82D691F47C91C0019640B /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		A2D82D691F47C91C0019640B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2D82D6A1F47C9240019640B /* VideoCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,7 +172,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2D82D6B1F47C9240019640B /* VideoCell.swift in Sources */,
+				A2D82D671F47C8E10019640B /* UIView+Extension.swift in Sources */,
 				A2D82D541F47B24D0019640B /* HomeViewController.swift in Sources */,
+				A2D82D651F47C8810019640B /* UIColor+Extension.swift in Sources */,
 				A2D82D521F47B24D0019640B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
