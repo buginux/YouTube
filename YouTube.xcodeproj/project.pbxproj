@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A2D82D521F47B24D0019640B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D82D511F47B24D0019640B /* AppDelegate.swift */; };
-		A2D82D541F47B24D0019640B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D82D531F47B24D0019640B /* ViewController.swift */; };
-		A2D82D571F47B24D0019640B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2D82D551F47B24D0019640B /* Main.storyboard */; };
+		A2D82D541F47B24D0019640B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D82D531F47B24D0019640B /* HomeViewController.swift */; };
 		A2D82D591F47B24D0019640B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2D82D581F47B24D0019640B /* Assets.xcassets */; };
 		A2D82D5C1F47B24D0019640B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2D82D5A1F47B24D0019640B /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -17,8 +16,7 @@
 /* Begin PBXFileReference section */
 		A2D82D4E1F47B24D0019640B /* YouTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D82D511F47B24D0019640B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A2D82D531F47B24D0019640B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A2D82D561F47B24D0019640B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A2D82D531F47B24D0019640B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A2D82D581F47B24D0019640B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A2D82D5B1F47B24D0019640B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2D82D5D1F47B24D0019640B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,8 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				A2D82D511F47B24D0019640B /* AppDelegate.swift */,
-				A2D82D531F47B24D0019640B /* ViewController.swift */,
-				A2D82D551F47B24D0019640B /* Main.storyboard */,
+				A2D82D531F47B24D0019640B /* HomeViewController.swift */,
 				A2D82D581F47B24D0019640B /* Assets.xcassets */,
 				A2D82D5A1F47B24D0019640B /* LaunchScreen.storyboard */,
 				A2D82D5D1F47B24D0019640B /* Info.plist */,
@@ -124,7 +121,6 @@
 			files = (
 				A2D82D5C1F47B24D0019640B /* LaunchScreen.storyboard in Resources */,
 				A2D82D591F47B24D0019640B /* Assets.xcassets in Resources */,
-				A2D82D571F47B24D0019640B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2D82D541F47B24D0019640B /* ViewController.swift in Sources */,
+				A2D82D541F47B24D0019640B /* HomeViewController.swift in Sources */,
 				A2D82D521F47B24D0019640B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,14 +139,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A2D82D551F47B24D0019640B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A2D82D561F47B24D0019640B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A2D82D5A1F47B24D0019640B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -275,6 +263,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AMCXGTYG4X;
 				INFOPLIST_FILE = YouTube/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swiftyper.YouTube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -289,6 +278,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AMCXGTYG4X;
 				INFOPLIST_FILE = YouTube/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swiftyper.YouTube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
