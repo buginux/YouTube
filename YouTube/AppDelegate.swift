@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func insertSampleVideos() {
         let fetchRequest = NSFetchRequest<Video>(entityName: "Video")
-        fetchRequest.predicate = NSPredicate(format: "title == %@", "Taylor Swift - Blank Space")
+        fetchRequest.predicate = NSPredicate(format: "title != nil")
         
         do {
             let count = try coreDataStack.context.count(for: fetchRequest)
