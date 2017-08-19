@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VideoCell: UICollectionViewCell {
+class VideoCell: BaseCell {
     
     var thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
@@ -18,15 +18,7 @@ class VideoCell: UICollectionViewCell {
         
         return imageView
     }()
-    
-    var separatorLine: UIView = {
-        let view = UIView()
-        
-        view.backgroundColor = UIColor.black
-        
-        return view
-    }()
-    
+
     var profileImageView: UIImageView = {
         let imageView = UIImageView()
         
@@ -37,11 +29,19 @@ class VideoCell: UICollectionViewCell {
         return imageView
     }()
     
+    var separatorLine: UIView = {
+        let view = UIView()
+        
+        view.backgroundColor = UIColor.rgb(red: 230, green: 230, blue: 230)
+        
+        return view
+    }()
+    
     var titleLabel: UILabel = {
         let label = UILabel()
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.purple
+        label.text = "Taylor Swift - Blank Space"
         
         return label
     }()
@@ -50,24 +50,16 @@ class VideoCell: UICollectionViewCell {
         let textView = UITextView()
         
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.backgroundColor = UIColor.cyan
+        textView.text = "TaylorSwiftVEVO • 1,604,684,607 views • 2 years ago"
+        textView.textContainerInset = UIEdgeInsetsMake(0, -4, 0, 0)
+        textView.textColor = UIColor.lightGray
         
         return textView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func commonInit() {
+        super.commonInit()
         
-        commonInit()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        commonInit()
-    }
-    
-    func commonInit() {
         contentView.addSubview(thumbnailImageView)
         contentView.addSubview(separatorLine)
         contentView.addSubview(profileImageView)
@@ -85,7 +77,7 @@ class VideoCell: UICollectionViewCell {
         addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .leading, relatedBy: .equal, toItem: profileImageView, attribute: .trailing, multiplier: 1.0, constant: 8.0))
         addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .trailing, relatedBy: .equal, toItem: thumbnailImageView, attribute: .trailing, multiplier: 1.0, constant: 0))
         
-        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.0, constant: 20.0))
+        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.0, constant: 30.0))
         addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .leading, relatedBy: .equal, toItem: profileImageView, attribute: .trailing, multiplier: 1.0, constant: 8.0))
         addConstraints([NSLayoutConstraint(item: subtitleTextView, attribute: .trailing, relatedBy: .equal, toItem: thumbnailImageView, attribute: .trailing, multiplier: 1.0, constant: 0.0)])
         addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1.0, constant: 8.0))

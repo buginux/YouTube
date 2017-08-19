@@ -9,6 +9,12 @@
 import UIKit
 
 class HomeViewController: UICollectionViewController {
+    
+    let menuBar: MenuBar = {
+        let menu = MenuBar(frame: .zero)
+        
+        return menu
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,14 +22,18 @@ class HomeViewController: UICollectionViewController {
         initViews()
     }
     
-    func initViews() {
+    // MARK: Private
+    
+    private func initViews() {
         setupNavigationBar()
         
+        collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "CellIdentifier")
     }
     
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         navigationController?.navigationBar.isTranslucent = false
         
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: 44.0))
@@ -31,6 +41,10 @@ class HomeViewController: UICollectionViewController {
         titleLabel.textColor = UIColor.white
         titleLabel.font = UIFont.systemFont(ofSize: 20.0)
         navigationItem.titleView = titleLabel
+        
+        view.addSubview(menuBar)
+        view.addConstraints(withFormat: "H:|[v0]|", views: [menuBar])
+        view.addConstraints(withFormat: "V:|[v0(50)]", views: [menuBar])
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = UIColor.white
         window?.makeKeyAndVisible()
         
+        application.statusBarStyle = .lightContent
         setupAppearance()
 
         return true
@@ -29,13 +30,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setupAppearance() {
         UINavigationBar.appearance().barTintColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         
         let statusBarBackgroundView = UIView()
         statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 194, green: 31, blue: 31)
         window?.addSubview(statusBarBackgroundView)
         
         window?.addConstraints(withFormat: "H:|[v0]|", views: [statusBarBackgroundView])
-        window?.addConstraints(withFormat: "V:|[v0(20)]|", views: [statusBarBackgroundView])
+        window?.addConstraints(withFormat: "V:|[v0(20)]", views: [statusBarBackgroundView])
     }
 }
 
