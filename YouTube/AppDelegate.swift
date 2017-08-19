@@ -17,11 +17,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         let layout = UICollectionViewFlowLayout()
-        window?.rootViewController = HomeViewController(collectionViewLayout: layout)
+        let homeViewController = HomeViewController(collectionViewLayout: layout)
+        window?.rootViewController = UINavigationController(rootViewController: homeViewController)
         window?.backgroundColor = UIColor.white
         window?.makeKeyAndVisible()
+        
+        setupAppearance()
 
         return true
+    }
+    
+    func setupAppearance() {
+        UINavigationBar.appearance().barTintColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+        
+        let statusBarBackgroundView = UIView()
+        statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 194, green: 31, blue: 31)
+        window?.addSubview(statusBarBackgroundView)
+        
+        window?.addConstraints(withFormat: "H:|[v0]|", views: [statusBarBackgroundView])
+        window?.addConstraints(withFormat: "V:|[v0(20)]|", views: [statusBarBackgroundView])
     }
 }
 
