@@ -7,10 +7,25 @@
 //
 
 import UIKit
+import CoreData
 
 class HomeViewController: UICollectionViewController {
     
-    private var videos = Video.sampleVideos()
+    var managedContext: NSManagedObjectContext!
+    lazy var fetchedResultsController: NSFetchedResultsController<Video> = {
+        let fetchRequest = NSFetchRequest<Video>(entityName: "Video")
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        do {
+            try controller.performFetch()
+        } catch let error as NSError {
+            print("Error: \(error.localizedDescription)")
+        }
+        
+        return controller
+    }()
     
     private let menuBar: MenuBar = {
         let menu = MenuBar(frame: .zero)
@@ -67,13 +82,13 @@ class HomeViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return videos.count
+        return fetchedResultsController.fetchedObjects!.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellIdentifier", for: indexPath) as! VideoCell
         
-        let video = self.videos[indexPath.item]
+        let video = fetchedResultsController.fetchedObjects![indexPath.item]
         cell.config(withVideo: video)
         
         return cell
@@ -83,7 +98,7 @@ class HomeViewController: UICollectionViewController {
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let video = videos[indexPath.item]
+        let video = fetchedResultsController.fetchedObjects![indexPath.item]
         let height = VideoCell.heightForCell(withVideo: video)
         
         return CGSize(width: view.frame.width, height: height)
