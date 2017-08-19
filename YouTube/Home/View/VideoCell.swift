@@ -10,18 +10,22 @@ import UIKit
 
 class VideoCell: BaseCell {
     
-    var thumbnailImageView: UIImageView = {
+    private var thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = UIColor.purple
         imageView.image = UIImage(named: "taylor_swift_blank_space")
         imageView.contentMode = .scaleAspectFill
+//        imageView.clipsToBounds = true
         
         return imageView
     }()
 
-    var profileImageView: UIImageView = {
+    private var profileImageView: UIImageView = {
         let imageView = UIImageView()
         
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "taylor_swift_profile")
         imageView.layer.cornerRadius = 22.0
         imageView.layer.masksToBounds = true
@@ -29,32 +33,33 @@ class VideoCell: BaseCell {
         return imageView
     }()
     
-    var separatorLine: UIView = {
+    private var separatorLine: UIView = {
         let view = UIView()
         
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor.rgb(red: 230, green: 230, blue: 230)
         
         return view
     }()
     
-    var titleLabel: UILabel = {
+    private var titleLabel: UILabel = {
         let label = UILabel()
         
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Taylor Swift - Blank Space"
         
         return label
     }()
     
-    var subtitleTextView: UITextView = {
-        let textView = UITextView()
+    private var subtitleLabel: UILabel = {
+        let label = UILabel()
         
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.text = "TaylorSwiftVEVO • 1,604,684,607 views • 2 years ago"
-        textView.textContainerInset = UIEdgeInsetsMake(0, -4, 0, 0)
-        textView.textColor = UIColor.lightGray
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 14.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.lightGray
         
-        return textView
+        return label
     }()
     
     override func commonInit() {
@@ -64,23 +69,59 @@ class VideoCell: BaseCell {
         contentView.addSubview(separatorLine)
         contentView.addSubview(profileImageView)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(subtitleTextView)
+        contentView.addSubview(subtitleLabel)
         
+        let thumbnailImageWidth = bounds.width - 32.0
+        let thumbnailImageHeight = thumbnailImageWidth * 9 / 16
         addConstraints(withFormat: "H:|-16-[v0]-16-|", views: [thumbnailImageView])
-        addConstraints(withFormat: "H:|-16-[v0(44)]", views: [profileImageView])
+        addConstraints(withFormat: "V:|-16-[v0]-8-[v1(44)]", options: .alignAllLeading, views: [thumbnailImageView, profileImageView])
+        
+        addConstraints(withFormat: "H:[v0(44)]-8-[v1]-16-|", options: .alignAllTop, views: [profileImageView, titleLabel])
+        addConstraints(withFormat: "V:[v0]-8-[v1]", options: [.alignAllLeading, .alignAllTrailing], views: [titleLabel, subtitleLabel])
+        
         addConstraints(withFormat: "H:|[v0]|", views: [separatorLine])
+        addConstraints(withFormat: "V:[v0]-8@750-[v1(1)]", views: [subtitleLabel, separatorLine])
         
-        addConstraints(withFormat: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|", views: [thumbnailImageView, profileImageView, separatorLine])
+        addConstraints([
+            thumbnailImageView.heightAnchor.constraint(equalToConstant: thumbnailImageHeight),
+            separatorLine.topAnchor.constraint(greaterThanOrEqualTo: profileImageView.bottomAnchor, constant: 8.0)
+        ])
+    }
+    
+    func config(withVideo video: Video) {
+        titleLabel.text = video.title
+        subtitleLabel.text = video.subtitle
         
-        addConstraints(withFormat: "V:[v0(20)]", views: [titleLabel])
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: thumbnailImageView, attribute: .bottom, multiplier: 1.0, constant: 8.0))
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .leading, relatedBy: .equal, toItem: profileImageView, attribute: .trailing, multiplier: 1.0, constant: 8.0))
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .trailing, relatedBy: .equal, toItem: thumbnailImageView, attribute: .trailing, multiplier: 1.0, constant: 0))
+        if let imageName = video.thumbnailImageName {
+            thumbnailImageView.image = UIImage(named: imageName)
+        }
+    }
+    
+    class func heightForCell(withVideo video: Video) -> CGFloat {
+        var height: CGFloat = 16.0
         
-        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.0, constant: 30.0))
-        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .leading, relatedBy: .equal, toItem: profileImageView, attribute: .trailing, multiplier: 1.0, constant: 8.0))
-        addConstraints([NSLayoutConstraint(item: subtitleTextView, attribute: .trailing, relatedBy: .equal, toItem: thumbnailImageView, attribute: .trailing, multiplier: 1.0, constant: 0.0)])
-        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1.0, constant: 8.0))
+        let thumbnailImageWidth = UIScreen.main.bounds.width - 32.0
+        let thumbnailImageHeight = thumbnailImageWidth * 9 / 16
+        height += (thumbnailImageHeight + 8.0)
         
+        guard let title = video.title, let subtitle = video.subtitle else {
+            height += (44.0 + 8.0 + 1.0)
+            return height
+        }
+        
+        let titleWidth = thumbnailImageWidth - 44.0 - 8.0
+        let boundingSize = CGSize(width: titleWidth, height: CGFloat(MAXFLOAT))
+        
+        var attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17.0)]
+        let titleSize = (title as NSString).boundingRect(with: boundingSize, options: [.usesFontLeading, .usesLineFragmentOrigin], attributes: attributes, context: nil).size
+        height += (titleSize.height + 8.0)
+        
+        attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)]
+        let subtitleSize = (subtitle as NSString).boundingRect(with: boundingSize, options: [.usesFontLeading, .usesLineFragmentOrigin], attributes: attributes, context: nil).size
+        height += (subtitleSize.height + 8.0)
+        
+        height += 1.0
+        
+        return height
     }
 }

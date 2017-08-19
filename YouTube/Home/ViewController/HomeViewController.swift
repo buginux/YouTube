@@ -10,7 +10,9 @@ import UIKit
 
 class HomeViewController: UICollectionViewController {
     
-    let menuBar: MenuBar = {
+    private var videos = Video.sampleVideos()
+    
+    private let menuBar: MenuBar = {
         let menu = MenuBar(frame: .zero)
         
         return menu
@@ -36,23 +38,43 @@ class HomeViewController: UICollectionViewController {
     private func setupNavigationBar() {
         navigationController?.navigationBar.isTranslucent = false
         
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: 44.0))
+        let titleLabel = UILabel()
         titleLabel.text = "Home"
         titleLabel.textColor = UIColor.white
         titleLabel.font = UIFont.systemFont(ofSize: 20.0)
-        navigationItem.titleView = titleLabel
+        titleLabel.sizeToFit()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
         
         view.addSubview(menuBar)
         view.addConstraints(withFormat: "H:|[v0]|", views: [menuBar])
         view.addConstraints(withFormat: "V:|[v0(50)]", views: [menuBar])
+        
+        let searchImage = UIImage(named: "search_icon")?.withRenderingMode(.alwaysOriginal)
+        let searchButtonItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(handleSearch(sender:)))
+        
+        let moreImage = UIImage(named: "nav_more_icon")?.withRenderingMode(.alwaysOriginal)
+        let moreButtonItem = UIBarButtonItem(image: moreImage, style: .plain, target: self, action: #selector(handleMore(sender:)))
+        
+        navigationItem.rightBarButtonItems = [moreButtonItem, searchButtonItem]
+    }
+    
+    @objc func handleSearch(sender: UIButton) {
+        print("search")
+    }
+    
+    @objc func handleMore(sender: UIButton) {
+        print("more")
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return videos.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellIdentifier", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellIdentifier", for: indexPath) as! VideoCell
+        
+        let video = self.videos[indexPath.item]
+        cell.config(withVideo: video)
         
         return cell
     }
@@ -61,10 +83,10 @@ class HomeViewController: UICollectionViewController {
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        // AspectRatio -> 16:9
-        let height = (view.frame.width - 16 - 16) * 9 / 16
+        let video = videos[indexPath.item]
+        let height = VideoCell.heightForCell(withVideo: video)
         
-        return CGSize(width: view.frame.width, height: height + 16 + 68)
+        return CGSize(width: view.frame.width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
