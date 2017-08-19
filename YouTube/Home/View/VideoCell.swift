@@ -17,7 +17,6 @@ class VideoCell: BaseCell {
         imageView.backgroundColor = UIColor.purple
         imageView.image = UIImage(named: "taylor_swift_blank_space")
         imageView.contentMode = .scaleAspectFill
-//        imageView.clipsToBounds = true
         
         return imageView
     }()
@@ -26,7 +25,6 @@ class VideoCell: BaseCell {
         let imageView = UIImageView()
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "taylor_swift_profile")
         imageView.layer.cornerRadius = 22.0
         imageView.layer.masksToBounds = true
         
@@ -74,10 +72,16 @@ class VideoCell: BaseCell {
         let thumbnailImageWidth = bounds.width - 32.0
         let thumbnailImageHeight = thumbnailImageWidth * 9 / 16
         addConstraints(withFormat: "H:|-16-[v0]-16-|", views: [thumbnailImageView])
-        addConstraints(withFormat: "V:|-16-[v0]-8-[v1(44)]", options: .alignAllLeading, views: [thumbnailImageView, profileImageView])
+        addConstraints(withFormat: "V:|-16-[v0]-8-[v1(44)]",
+                       options: .alignAllLeading,
+                       views: [thumbnailImageView, profileImageView])
         
-        addConstraints(withFormat: "H:[v0(44)]-8-[v1]-16-|", options: .alignAllTop, views: [profileImageView, titleLabel])
-        addConstraints(withFormat: "V:[v0]-8-[v1]", options: [.alignAllLeading, .alignAllTrailing], views: [titleLabel, subtitleLabel])
+        addConstraints(withFormat: "H:[v0(44)]-8-[v1]-16-|",
+                       options: .alignAllTop,
+                       views: [profileImageView, titleLabel])
+        addConstraints(withFormat: "V:[v0]-8-[v1]",
+                       options: [.alignAllLeading, .alignAllTrailing],
+                       views: [titleLabel, subtitleLabel])
         
         addConstraints(withFormat: "H:|[v0]|", views: [separatorLine])
         addConstraints(withFormat: "V:[v0]-8@750-[v1(1)]", views: [subtitleLabel, separatorLine])
@@ -95,6 +99,10 @@ class VideoCell: BaseCell {
         if let imageName = video.thumbnailImageName {
             thumbnailImageView.image = UIImage(named: imageName)
         }
+        
+        if let imageName = video.channel?.profileImageName {
+            profileImageView.image = UIImage(named: imageName)
+        }
     }
     
     class func heightForCell(withVideo video: Video) -> CGFloat {
@@ -104,7 +112,7 @@ class VideoCell: BaseCell {
         let thumbnailImageHeight = thumbnailImageWidth * 9 / 16
         height += (thumbnailImageHeight + 8.0)
         
-        guard let title = video.title, let subtitle = video.subtitle else {
+        guard let title = video.title else {
             height += (44.0 + 8.0 + 1.0)
             return height
         }
@@ -117,7 +125,7 @@ class VideoCell: BaseCell {
         height += (titleSize.height + 8.0)
         
         attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)]
-        let subtitleSize = (subtitle as NSString).boundingRect(with: boundingSize, options: [.usesFontLeading, .usesLineFragmentOrigin], attributes: attributes, context: nil).size
+        let subtitleSize = (video.subtitle as NSString).boundingRect(with: boundingSize, options: [.usesFontLeading, .usesLineFragmentOrigin], attributes: attributes, context: nil).size
         height += (subtitleSize.height + 8.0)
         
         height += 1.0
