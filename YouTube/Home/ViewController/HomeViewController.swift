@@ -11,12 +11,15 @@ import CoreData
 
 class HomeViewController: UICollectionViewController {
     
+    var store: VideoStore!
     var managedContext: NSManagedObjectContext!
+    
     lazy var fetchedResultsController: NSFetchedResultsController<Video> = {
         let fetchRequest = NSFetchRequest<Video>(entityName: "Video")
         let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedContext, sectionNameKeyPath: nil, cacheName: nil)
+        controller.delegate = self
         
         do {
             try controller.performFetch()
@@ -37,6 +40,23 @@ class HomeViewController: UICollectionViewController {
         super.viewDidLoad()
         
         initViews()
+        
+        store.fetchVideos { (videoResult) in
+            switch videoResult {
+            case let .success(videos):
+                print("Successfully found \(videos.count) videos")
+                
+                do {
+                    try self.managedContext.save()
+                    try self.fetchedResultsController.performFetch()
+                } catch let error {
+                    print("Save error: \(error)")
+                }
+                
+            case let .failure(error):
+                print("Error fetching videos: \(error)")
+            }
+        }
     }
     
     // MARK: Private
@@ -106,6 +126,12 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+}
+
+extension HomeViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        collectionView?.reloadData()
     }
 }
 

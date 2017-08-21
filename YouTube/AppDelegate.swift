@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     lazy var coreDataStack = CoreDataStack(modelName: "YouTube")
+    lazy var store = VideoStore(managedContext: coreDataStack.context)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let layout = UICollectionViewFlowLayout()
         let homeViewController = HomeViewController(collectionViewLayout: layout)
         homeViewController.managedContext = coreDataStack.context
+        homeViewController.store = store
         window?.rootViewController = UINavigationController(rootViewController: homeViewController)
         window?.backgroundColor = UIColor.white
         window?.makeKeyAndVisible()
