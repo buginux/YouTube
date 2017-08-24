@@ -25,6 +25,8 @@ class APIClient {
                     return .failure(APIClientError.invalidJSONData)
             }
             
+            clearData(withContext: context)
+            
             var finalVideos = [Video]()
             for videoJSON in videosArray {
                 if let video = video(fromJSON: videoJSON, inManagedContext: context) {
@@ -35,6 +37,8 @@ class APIClient {
             if finalVideos.isEmpty && !videosArray.isEmpty {
                 return .failure(APIClientError.invalidJSONData)
             }
+            
+            saveVideos(withContext: context)
             
             return .success(finalVideos)
         } catch let error {
@@ -50,18 +54,41 @@ class APIClient {
                 return nil
         }
         
+        let channelDict = json["channel"] as? [String: Any]
+        
+        let channelEntity = NSEntityDescription.entity(forEntityName: "Channel", in: context)!
+        let c = Channel(entity: channelEntity, insertInto: context)
+        if let channelDict = channelDict {
+            c.profileImageName = channelDict["profile_image_name"] as? String
+            c.name = channelDict["name"] as? String
+        }
+            
         let videoEntity = NSEntityDescription.entity(forEntityName: "Video", in: context)!
         let v = Video(entity: videoEntity, insertInto: context)
         v.title = title
         v.numberOfViews = numberOfViews
         v.thumbnailImageName = thumbnailURLString
-        
-        do {
-            try context.save()
-        } catch {
-            return nil
-        }
+        v.channel = c
         
         return v
+    }
+    
+    private static func clearData(withContext context: NSManagedObjectContext) {
+        do {
+            let fetchRequest = NSFetchRequest<Video>(entityName: "Video")
+            let videos = try context.fetch(fetchRequest)
+            _ = videos.map { context.delete($0) }
+            try context.save()
+        } catch let error {
+            print("Deleting error: \(error)")
+        }
+    }
+    
+    private static func saveVideos(withContext context: NSManagedObjectContext) {
+        do {
+            try context.save()
+        } catch let error {
+            print("Save error: \(error)")
+        }
     }
 }

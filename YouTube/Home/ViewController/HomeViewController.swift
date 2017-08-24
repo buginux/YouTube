@@ -41,13 +41,12 @@ class HomeViewController: UICollectionViewController {
         
         initViews()
         
-        store.fetchVideos { (videoResult) in
+        store.fetchVideos { [unowned self] (videoResult)in
             switch videoResult {
             case let .success(videos):
                 print("Successfully found \(videos.count) videos")
                 
                 do {
-                    try self.managedContext.save()
                     try self.fetchedResultsController.performFetch()
                 } catch let error {
                     print("Save error: \(error)")

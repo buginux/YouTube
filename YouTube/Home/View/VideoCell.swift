@@ -17,6 +17,7 @@ class VideoCell: BaseCell {
         imageView.backgroundColor = UIColor.purple
         imageView.image = UIImage(named: "taylor_swift_blank_space")
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         
         return imageView
     }()
@@ -27,6 +28,7 @@ class VideoCell: BaseCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 22.0
         imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
         
         return imageView
     }()
@@ -96,13 +98,8 @@ class VideoCell: BaseCell {
         titleLabel.text = video.title
         subtitleLabel.text = video.subtitle
         
-        if let imageName = video.thumbnailImageName {
-            thumbnailImageView.image = UIImage(named: imageName)
-        }
-        
-        if let imageName = video.channel?.profileImageName {
-            profileImageView.image = UIImage(named: imageName)
-        }
+        thumbnailImageView.loadImage(withURLString: video.thumbnailImageName!)
+        profileImageView.loadImage(withURLString: video.channel?.profileImageName)
     }
     
     class func heightForCell(withVideo video: Video) -> CGFloat {

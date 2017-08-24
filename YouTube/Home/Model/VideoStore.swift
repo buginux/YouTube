@@ -29,11 +29,8 @@ class VideoStore {
     func fetchVideos(completion: @escaping (VideoResult) -> Void) {
         let url = URL(string: APIClient.youtubeURLString)!
         let request = URLRequest(url: url)
-        let task = session.dataTask(with: request) { (data, response, error) in
-            
+        let task = session.dataTask(with: request) { [unowned self] (data, response, error) in
             let result = self.processVideosRequest(data: data, error: error)
-            completion(result)
-            
         }
         task.resume()
     }
@@ -45,5 +42,4 @@ class VideoStore {
         
         return APIClient.videos(fromJSON: jsonData, inManagedContext:self.managedContext)
     }
-    
 }
