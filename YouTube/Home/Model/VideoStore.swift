@@ -31,6 +31,7 @@ class VideoStore {
         let request = URLRequest(url: url)
         let task = session.dataTask(with: request) { [unowned self] (data, response, error) in
             let result = self.processVideosRequest(data: data, error: error)
+            completion(result)
         }
         task.resume()
     }

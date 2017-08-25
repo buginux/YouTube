@@ -13,8 +13,7 @@
 		A201417E1F489A7F00B71EFC /* Channel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A201417A1F489A7F00B71EFC /* Channel+CoreDataProperties.swift */; };
 		A201417F1F489A7F00B71EFC /* Video+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A201417B1F489A7F00B71EFC /* Video+CoreDataClass.swift */; };
 		A20141801F489A7F00B71EFC /* Video+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A201417C1F489A7F00B71EFC /* Video+CoreDataProperties.swift */; };
-		A22153FA1F483962000F4B90 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22153F91F483962000F4B90 /* Video.swift */; };
-		A26D6DCC1F4F0B41002D9E96 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26D6DCB1F4F0B41002D9E96 /* UIImageView+Extension.swift */; };
+		A20D76B71F50657300C9FFD7 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20D76B61F50657300C9FFD7 /* AsyncImageView.swift */; };
 		A2A700601F4B20BE0007FCE1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A7005F1F4B20BE0007FCE1 /* APIClient.swift */; };
 		A2A700641F4B24CB0007FCE1 /* VideoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A700631F4B24CB0007FCE1 /* VideoStore.swift */; };
 		A2AA69B61F47E3FE00691B3D /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AA69B51F47E3FE00691B3D /* MenuBar.swift */; };
@@ -36,8 +35,7 @@
 		A201417A1F489A7F00B71EFC /* Channel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Channel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A201417B1F489A7F00B71EFC /* Video+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Video+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A201417C1F489A7F00B71EFC /* Video+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Video+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A22153F91F483962000F4B90 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
-		A26D6DCB1F4F0B41002D9E96 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		A20D76B61F50657300C9FFD7 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		A2A7005F1F4B20BE0007FCE1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		A2A700631F4B24CB0007FCE1 /* VideoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStore.swift; sourceTree = "<group>"; };
 		A2AA69B51F47E3FE00691B3D /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
@@ -80,7 +78,6 @@
 				A201417A1F489A7F00B71EFC /* Channel+CoreDataProperties.swift */,
 				A201417B1F489A7F00B71EFC /* Video+CoreDataClass.swift */,
 				A201417C1F489A7F00B71EFC /* Video+CoreDataProperties.swift */,
-				A22153F91F483962000F4B90 /* Video.swift */,
 				A201416C1F4893E500B71EFC /* CoreDataStack.swift */,
 				A201416E1F4899AF00B71EFC /* YouTube.xcdatamodeld */,
 				A2A700631F4B24CB0007FCE1 /* VideoStore.swift */,
@@ -131,7 +128,6 @@
 			children = (
 				A2D82D641F47C8810019640B /* UIColor+Extension.swift */,
 				A2D82D661F47C8E10019640B /* UIView+Extension.swift */,
-				A26D6DCB1F4F0B41002D9E96 /* UIImageView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -153,6 +149,7 @@
 				A2D82D6A1F47C9240019640B /* VideoCell.swift */,
 				A2AA69B51F47E3FE00691B3D /* MenuBar.swift */,
 				A2AA69B71F47EDA100691B3D /* MenuBarCell.swift */,
+				A20D76B61F50657300C9FFD7 /* AsyncImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -230,18 +227,17 @@
 				A2A700641F4B24CB0007FCE1 /* VideoStore.swift in Sources */,
 				A2D82D6B1F47C9240019640B /* VideoCell.swift in Sources */,
 				A2D82D671F47C8E10019640B /* UIView+Extension.swift in Sources */,
-				A26D6DCC1F4F0B41002D9E96 /* UIImageView+Extension.swift in Sources */,
 				A20141801F489A7F00B71EFC /* Video+CoreDataProperties.swift in Sources */,
 				A2A700601F4B20BE0007FCE1 /* APIClient.swift in Sources */,
 				A2AA69B61F47E3FE00691B3D /* MenuBar.swift in Sources */,
 				A2AA69B81F47EDA100691B3D /* MenuBarCell.swift in Sources */,
-				A22153FA1F483962000F4B90 /* Video.swift in Sources */,
 				A201416D1F4893E500B71EFC /* CoreDataStack.swift in Sources */,
 				A20141701F4899AF00B71EFC /* YouTube.xcdatamodeld in Sources */,
 				A201417F1F489A7F00B71EFC /* Video+CoreDataClass.swift in Sources */,
 				A2AA69BA1F47EDAC00691B3D /* BaseCell.swift in Sources */,
 				A2D82D541F47B24D0019640B /* HomeViewController.swift in Sources */,
 				A2D82D651F47C8810019640B /* UIColor+Extension.swift in Sources */,
+				A20D76B71F50657300C9FFD7 /* AsyncImageView.swift in Sources */,
 				A2D82D521F47B24D0019640B /* AppDelegate.swift in Sources */,
 				A201417D1F489A7F00B71EFC /* Channel+CoreDataClass.swift in Sources */,
 				A201417E1F489A7F00B71EFC /* Channel+CoreDataProperties.swift in Sources */,

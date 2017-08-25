@@ -1,9 +1,8 @@
-
 //
-//  UIImage+Extension.swift
+//  AsyncImageView.swift
 //  YouTube
 //
-//  Created by buginux on 2017/8/24.
+//  Created by buginux on 2017/8/25.
 //  Copyright © 2017年 buginux. All rights reserved.
 //
 
@@ -11,9 +10,13 @@ import UIKit
 
 let imageCache = NSCache<NSString, UIImage>()
 
-extension UIImageView {
+class AsyncImageView: UIImageView {
+    
+    var imageURLString: String?
+    
     func loadImage(withURLString urlString: String?) {
         guard let urlString = urlString else { return }
+        imageURLString = urlString
         
         if let cachedImage = imageCache.object(forKey: urlString as NSString) {
             self.image = cachedImage
@@ -27,6 +30,8 @@ extension UIImageView {
             let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
                 if let data = data, let image = UIImage(data: data) {
                     imageCache.setObject(image, forKey: urlString as NSString)
+                    
+                    if self.imageURLString != urlString { return }
                     
                     DispatchQueue.main.async {
                         self.image = image

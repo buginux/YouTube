@@ -34,6 +34,8 @@ class APIClient {
                 }
             }
             
+            saveVideos(withContext: context)
+            
             if finalVideos.isEmpty && !videosArray.isEmpty {
                 return .failure(APIClientError.invalidJSONData)
             }

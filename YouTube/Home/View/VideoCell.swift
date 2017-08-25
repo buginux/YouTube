@@ -10,20 +10,19 @@ import UIKit
 
 class VideoCell: BaseCell {
     
-    private var thumbnailImageView: UIImageView = {
-        let imageView = UIImageView()
+    private var thumbnailImageView: AsyncImageView = {
+        let imageView = AsyncImageView()
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = UIColor.purple
-        imageView.image = UIImage(named: "taylor_swift_blank_space")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         
         return imageView
     }()
 
-    private var profileImageView: UIImageView = {
-        let imageView = UIImageView()
+    private var profileImageView: AsyncImageView = {
+        let imageView = AsyncImageView()
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 22.0
