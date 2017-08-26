@@ -97,7 +97,9 @@ class HomeViewController: UICollectionViewController {
     }
     
     @objc func handleMore(sender: UIButton) {
-        print("more")
+        guard let window = UIApplication.shared.keyWindow else { return }
+        
+        SettingMenu.show(inView: window)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
